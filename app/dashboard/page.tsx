@@ -1,6 +1,11 @@
 import { cookies } from 'next/headers';
 import { jwtVerify } from 'jose';
 
+import Sidebar from '@/components/Sidebar';
+import Navbar from '@/components/Navbar';
+import '@/styles/dashboard.css';
+
+
 async function getSession() {
     const cookieStore = await cookies();
     const token = cookieStore.get('ticket_session')?.value;
@@ -18,8 +23,15 @@ async function getSession() {
 export default async function Dashboard(){
     const user:any = await getSession();
     return(
-        <>
-        <h1>Hola, {user.nombre}</h1>
+        <>  
+            <main>
+                <header>
+                    <Navbar page='Dashboard de Soporte'/>
+                </header>
+                <div className="main-container">
+                    <Sidebar className='sidebar' />
+                </div>
+            </main>
         </>
     );
 }

@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
  title: {
-    default: 'Nexticket',
+    default: 'MyTickets',
     template: '%s | Gestor de Tickets', // Ej: "Panel | Gestor de Tickets" en subpáginas
   },
   description: "Aplicación para gestionar tus tickets de trabajo pendientes de manera eficiente y organizada.",

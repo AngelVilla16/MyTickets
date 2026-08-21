@@ -1,0 +1,33 @@
+.link-container {
+    
+    display: flex;
+    flex-direction: row;
+    margin-top: 4rem;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    color: rgb(166, 167, 167);
+    text-decoration: none;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+/* Estado Hover (al pasar el ratón) */
+.link-container:hover {
+    background-color: #1e293b;
+    color: #ffffff;
+}
+
+/* ESTADO ACTIVO (Enlace Seleccionado) */
+.link-container.active {
+    background-color: #3b82f6; /* Color azul destacado */
+    color: #ffffff;
+    font-weight: 600;
+}
+
+/* Opcional: Cambiar el color de los bordes o acentos del icono */
+.link-container.active .enlace {
+    color: #ffffff;
+}
+.enlace{
+    margin:10px;
+}
