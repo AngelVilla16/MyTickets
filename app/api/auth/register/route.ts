@@ -6,9 +6,9 @@ import {query} from '@/lib/db';
 
 export async function POST(request:Request){
     try{
-        const {correo, nombre, apellido, contrasena, vcontrasena} = await request.json();
+        const {correo, nombre, apellido, contrasena, vcontrasena, role} = await request.json();
 
-        if(!correo || !nombre || !apellido || !contrasena){
+        if(!correo || !nombre || !apellido || !contrasena ||!vcontrasena || !role){
             return NextResponse.json({mensaje:"todos los campos son requeridos"}, {status:400});
         }
 
@@ -29,9 +29,9 @@ export async function POST(request:Request){
 
         const hash = await bcrypt.hash(contrasena, 10);
 
-        const insertQuery = "INSERT INTO usuarios(nombre, apellido, correo, contrasena) VALUES(?,?,?,?)";
+        const insertQuery = "INSERT INTO usuarios(nombre, apellido, correo, contrasena, rol) VALUES(?,?,?,?,?)";
 
-        const nuevoUsuario = await query(insertQuery,[nombre, apellido, correo, hash]);
+        const nuevoUsuario = await query(insertQuery,[nombre, apellido, correo, hash,role]);
         return NextResponse.json({mensaje:"Usuario registrado con exito!"},{status:201});
     }
     catch(error){

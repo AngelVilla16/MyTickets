@@ -28,7 +28,7 @@ export async function middleware(request: NextRequest) {
     if ((pathname === '/' || pathname === '/register') && token) {
         try {
             await jwtVerify(token, secret);
-            // Corregido: agregado request.url como segundo parámetro
+          
             return NextResponse.redirect(new URL('/dashboard', request.url));
         } catch (error) {
             // Si el token ya no es válido, borramos la cookie limpia
@@ -36,11 +36,10 @@ export async function middleware(request: NextRequest) {
             response.cookies.delete('ticket_session');
             return response;
         }
-    }
-
+    }    
     return NextResponse.next();
 }
 
-export const config = {
-    matcher: ['/dashboard/:path*', '/', '/register'],
-};
+//export const config = {
+  //  matcher: ['/dashboard/:path*', '/', '/register'],
+//};

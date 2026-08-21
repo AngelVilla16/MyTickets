@@ -10,7 +10,7 @@ export async function POST(request:Request){
             return NextResponse.json({ mensaje: "Todos los campos son obligatorios" }, { status: 400 });
         }
 
-        const selectQuery = "SELECT id_usuario, correo, nombre, apellido, contrasena FROM usuarios WHERE correo = ?";
+        const selectQuery = "SELECT id_usuario, correo, nombre, apellido, contrasena, rol FROM usuarios WHERE correo = ?";
         const response:any = await query(selectQuery,[correo]);
 
         if(response.length===0){
@@ -30,7 +30,8 @@ export async function POST(request:Request){
             id: usuario.id_usuario,
             nombre: usuario.nombre,
             apellido: usuario.apellido,
-            correo: usuario.correo
+            correo: usuario.correo,
+            role: usuario.rol
         }
 
         const secret = new TextEncoder().encode(process.env.JWT_SECRET);
