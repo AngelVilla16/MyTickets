@@ -1,0 +1,149 @@
+/* ==========================================
+   TARJETA CONTENEDOR PRINCIPAL
+   ========================================== */
+.card {
+    width: 100%;
+    background-color: #010b27;
+    border: 1px solid #21262d;
+    border-radius: 10px;
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.card:hover {
+    border-color: #30363d;
+}
+
+/* ==========================================
+   BARRA SUPERIOR (BADGES + FECHA)
+   ========================================== */
+.card-top-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.card-badges {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.card-date {
+    color: #8b949e;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+/* ==========================================
+   TITULARES
+   ========================================== */
+.card-header {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.card-title {
+    color: #f0f6fc;
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 0;
+    line-height: 1.3;
+}
+
+.card-subtitle {
+    color: #8b949e;
+    font-size: 0.9rem;
+    font-weight: 400;
+    margin: 0;
+}
+
+/* ==========================================
+   DESCRIPCIÓN DEL TICKET
+   ========================================== */
+.card-desc {
+    color: #c9d1d9;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin: 0;
+    background-color: #161b22;
+    border: 1px solid #21262d;
+    border-radius: 6px;
+    padding: 12px 14px;
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+/* ==========================================
+   PIE DE TARJETA (OPCIONES Y BOTONES)
+   ========================================== */
+.card-options {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 4px;
+    padding-top: 14px;
+    border-top: 1px solid #21262d;
+    flex-wrap: wrap;
+}
+
+.action-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color:#4255B2;
+}
+
+.icon-card {
+    width: 18px;
+    height: 18px;
+    opacity: 0.7;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+}
+
+.icon-card:hover {
+    opacity: 1;
+}
+
+.type-badge {
+    font-size: 0.75rem;
+    padding: 3px 8px;
+    border-radius: 12px;
+    font-weight: 600;
+    text-transform: capitalize;
+}
+
+.type-badge.frontend { background-color: rgba(56, 139, 253, 0.15); color: #58a6ff; }
+.type-badge.backend { background-color: rgba(163, 113, 247, 0.15); color: #bc8cff; }
+.type-badge.bug { background-color: rgba(248, 81, 73, 0.15); color: #ff7b72; }
+.type-badge.sugerencia { background-color: rgba(46, 160, 67, 0.15); color: #3fb950; }
+
+.status-badge {
+    font-size: 0.75rem;
+    padding: 3px 8px;
+    border-radius: 12px;
+    font-weight: 500;
+}
+
+.status-activo { color: #3fb950; background-color: rgba(46, 160, 67, 0.1); }
+.status-pendiente { color: #d29922; background-color: rgba(210, 153, 34, 0.1); }
+.status-cerrado { color: #8b949e; background-color: rgba(139, 148, 158, 0.1); }
+
+.option{
+    border:1px solid #2a3b80;
+    border-radius: 10px;
+    width: 8rem;
+
+}
+.option:hover{
+    cursor:pointer;
+}

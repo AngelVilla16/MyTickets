@@ -1,7 +1,10 @@
 "use client";
 
+import Button from '@/components/ui/Button';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation'; // 1. Importas usePathname
+import { usePathname } from 'next/navigation'; 
+import { useTransition } from 'react';
+import { logout } from '@/app/actions/auth';
 import '@/styles/sidebar.css';
 
 interface SidebarProps {
@@ -9,12 +12,17 @@ interface SidebarProps {
 }
 
 export default function Sidebar({ className }: SidebarProps) {
-    const pathname = usePathname(); // 2. Obtienes la ruta actual (ej: '/dashboard')
-
+    const pathname = usePathname(); 
+    const [isPending, startTransition] = useTransition();
+    const handleLogout = () => {
+        startTransition(async () => {
+            await logout();
+        });
+    };
     return (
         <aside className={className}>
             <nav className='side-nav'>
-                {/* 3. Comparas pathname === '/dashboard' para agregar la clase 'active' */}
+                
                 <Link 
                     href='/dashboard' 
                     className={`link-container ${pathname === '/dashboard' ? 'active' : ''}`}
@@ -38,6 +46,10 @@ export default function Sidebar({ className }: SidebarProps) {
                     <img src="/assets/personalicon.svg" alt="Equipo" className="nav-icon" />
                     <span className='enlace'>Equipo</span>
                 </Link>
+                <div className="btn">
+                    <img src="/assets/cerrar.svg" alt="Cerrar Sesion" className="nav-icon" />
+                    <Button onClick={handleLogout} className='salir' textBtn='Cerrar Sesión'/>
+                </div>
             </nav>
         </aside>
     );

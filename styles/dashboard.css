@@ -1,21 +1,71 @@
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
 
-
 * {
     box-sizing: border-box;
     font-family: 'JetBrains Mono', monospace;
+    margin: 0;
+    padding: 0;
 }
-.main{
-    background-color: #0c1117;
-}
-.sidebar{
-    position:fixed;
-    top:4rem;
-    left:0;
-    height: 100vh;
-    width: 220px;
-    background-color: #040b27;
+
+/* Contenedor global de la pantalla */
+.dashboard-container {
     display: flex;
     flex-direction: column;
-    border: 1px solid white;
+    min-height: 100vh;
+    background-color: #0c1117;
+    color: #f0f6fc;
+}
+
+.header-wrapper {
+    width: 100%;
+    z-index: 10;
+}
+
+/* Layout con Flexbox para Sidebar y Contenido */
+.dashboard-layout {
+    display: flex;
+    flex: 1; 
+    width: 100%;
+}
+
+/* Sidebar fijo a la izquierda  */
+.sidebar {
+    width: 240px;
+    min-width: 240px;
+    background-color: #040b27;
+    border-right: 1px solid #30363d;
+    padding: 1rem;
+}
+
+/* Área de contenido a la derecha */
+.content-area {
+    flex: 1;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    overflow-x: auto; /* Evita que la tabla rompa la pantalla  */
+}
+
+/* Cabecera superior de la tabla */
+.table-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #21262d;
+    padding-bottom: 1rem;
+}
+
+.table-header h2 {
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.opciones {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.table-wrapper {
+    width: 100%;
 }
