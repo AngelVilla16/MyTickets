@@ -1,0 +1,35 @@
+* {
+    box-sizing: border-box;
+    font-family: 'JetBrains Mono', monospace;
+    margin: 0;
+    padding: 0;
+}
+.agentes-layout {
+    display: flex;
+    width: 100%;
+    min-height: calc(100vh - 60px);
+    background-color: #0d1117;
+    box-sizing: border-box;
+}
+.sidebar {
+    width: 240px;
+    min-width: 240px; 
+    max-width: 240px;  
+    height: auto;
+    background-color: #040b27;
+    border-right: 1px solid #30363d;
+    padding: 1.25rem 1rem;
+    box-sizing: border-box; 
+    display: flex;
+    flex-direction: column;
+}
+.agentes-grid {
+    flex: 1; /* Toma todo el espacio sobrante a la derecha de la sidebar */
+    display: flex;
+    flex-direction: column; /* Alineación vertical en filas */
+    gap: 16px;
+    padding: 24px;
+    width: 100%;
+    box-sizing: border-box;
+    align-items: stretch; /* Estira cada tarjeta al 100% del ancho del contenedor */
+}
