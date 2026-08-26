@@ -69,3 +69,8 @@
     display: flex;
     align-items: center;
 }
+.navBtn{
+    background:#ffb600;
+    color: black;
+    font-size:0.85rem;
+}

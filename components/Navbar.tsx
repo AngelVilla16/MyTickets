@@ -36,7 +36,7 @@ export default function Navbar({ page }: NavbarProps) {
                         {fechaStr && <span className='date'>{fechaStr}</span>}
                     </div>
                     <div className="action">
-                        <Button textBtn='+ Nuevo ticket' />
+                        <Button className='navBtn' textBtn='+ Asignar ticket' />
                     </div>
                 </div>
             </nav>

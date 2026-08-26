@@ -6,7 +6,34 @@
     margin: 0;
     padding: 0;
 }
-
+.opciones{
+    margin:10px;
+    padding:10px;
+}
+Button{
+    border:1px solid white;
+    padding:2px;
+    font-size:1rem;
+    width:150px;
+    height:30px;
+    margin-top:5px;
+    background: #040b27;
+}
+Button:hover{
+    cursor:pointer;
+}
+.filterselector{
+    margin-top:5px;
+    color:white;
+    border:1px solid black;
+    padding:5px;
+    border-radius: 5px;
+    text-align: center;
+    background-color: #1e293b;
+}
+.filterselector option{
+    background-color: #1e293b;
+}
 /* Contenedor global de la pantalla */
 .dashboard-container {
     display: flex;

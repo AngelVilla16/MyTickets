@@ -4,8 +4,12 @@ import { jwtVerify } from 'jose';
 import Sidebar from '@/components/Sidebar';
 import Navbar from '@/components/Navbar';
 import Table from '@/components/DashboardTable';
-import Button from '@/components/ui/Button';
+import FilterWrapper from '@/components/FilterWrapper'; // <-- Importamos la lógica cliente del filtro
 import '@/styles/dashboard.css';
+
+interface DashProps {
+    searchParams?: Promise<{ estado?: string }>;
+}
 
 async function getSession() {
     const cookieStore = await cookies();
@@ -14,7 +18,8 @@ async function getSession() {
     if (!token) return null;
 
     try {
-        const secret = new TextEncoder().encode(process.env.JWT_SECRET);
+        const secretKey = process.env.JWT_SECRET || 'dev_secret_key_change_in_prod';
+        const secret = new TextEncoder().encode(secretKey);
         const { payload } = await jwtVerify(token, secret);
         return payload;
     } catch (error) {
@@ -22,35 +27,31 @@ async function getSession() {
     }
 }
 
-export default async function Dashboard() {
+export default async function Dashboard({ searchParams }: DashProps) {
     const user: any = await getSession();
+
+    // Lectura segura de searchParams
+    const resolvedParams = searchParams ? await searchParams : {};
+    const estado = resolvedParams.estado;
 
     return (
         <div className="dashboard-container">
-            {/* Header  */}
-            
             <header className="header-wrapper">
                 <Navbar page="Dashboard de Soporte" />
             </header>
 
-            {/* Layout Principal Abajo Sidebar */}
             <div className="dashboard-layout">
                 <Sidebar className="sidebar" />
 
-                {/* Main */}
                 <main className="content-area">
                     <div className="table-header">
                         <h2>Tickets Recientes</h2>
-                        <div className="opciones">
-                            <Button textBtn="Todos" />
-                            <Button textBtn="Abiertos" />
-                            <Button textBtn="EN PROG." />
-                            <Button textBtn="Resueltos" />
-                        </div>
+                        {/* Wrapper que contiene SelectorFilter y Button con eventos cliente */}
+                        <FilterWrapper />
                     </div>
 
                     <div className="table-wrapper">
-                        <Table />
+                        <Table filtro={estado} />
                     </div>
                 </main>
             </div>
