@@ -7,6 +7,7 @@ import Selector from '@/components/ui/Selector';
 import Link from 'next/link';
 import React, {useState, useSyncExternalStore} from 'react';
 import {useRouter} from 'next/navigation';
+import {useTransition} from 'react';
 
 interface formProps{
     action?:string,
@@ -22,6 +23,7 @@ export default function signinLogin({action, className}:formProps){
     const [contrasena, setCont] = useState<string>("");
     const [vcontrasena, setVcont] = useState<string>("");
     const router = useRouter();
+    const [espera, setEspera] = useTransition();
 
     const optionsRol = [
         { value: 'Frontend', label: 'Frontend' },
@@ -32,34 +34,33 @@ export default function signinLogin({action, className}:formProps){
     ];
 
 
-    const handleRegister = async (e:React.FormEvent)=>{
+    const handleRegister = async (e: React.FormEvent) => {
         e.preventDefault();
         setMensaje("");
 
-        if(!role){
-            setMensaje("Seleccione un rol");
-            return;
-        }
-
-       try{
-            const res = await fetch('/api/auth/register',{
-                method:"POST",
-                headers:{'Content-Type':'application/json'},
-                body:JSON.stringify({nombre, apellido, correo, contrasena, vcontrasena, role})
-            });
-            const data = await res.json();
-
-            if(!res.ok){
-                setMensaje(data.mensaje);
+        setEspera(async () => {
+            if (!role) {
+                setMensaje("Seleccione un rol");
                 return;
-         }
-         router.push('/');
-       }
-       catch(error){
-        setMensaje("Problema con el servidor");
-       }
-        
-    }
+            }
+            try {
+                const res = await fetch('/api/auth/register', {
+                    method: "POST",
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ nombre, apellido, correo, contrasena, vcontrasena, role })
+                });
+                const data = await res.json();
+                if (!res.ok) {
+                    setMensaje(data.mensaje);
+                    return;
+                }
+                router.push('/');
+            }
+            catch (error) {
+                setMensaje("Problema con el servidor");
+            }
+        });
+    };
 
     return(
         <>
