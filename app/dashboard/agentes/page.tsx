@@ -24,6 +24,7 @@ export default async function Agentes() {
                         return (
                             <AgentCards 
                                 key={agent.id_usuario}
+                                idAgente={agent.id_usuario}
                                 tituloCard={nombreCompleto}
                                 subtituloCard={agent.rol}
                                 descripcion={agent.correo}

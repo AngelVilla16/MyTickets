@@ -1,12 +1,14 @@
 import '@/styles/agentecard.css';
 
 interface CardProps {
+    idAgente?:number;
     tituloCard?: string;     // Nombre del agente
     subtituloCard?: string;  // Rol / Puesto (ej. Dev Backend)
     descripcion?: string;    // Email o teléfono de contacto
+
 }
 
-export default function AgentCards({ tituloCard, subtituloCard, descripcion }: CardProps) {
+export default function AgentCards({idAgente, tituloCard, subtituloCard, descripcion }: CardProps) {
     // Generar iniciales para el avatar si hay un nombre
     const iniciales = tituloCard 
         ? tituloCard.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase()
@@ -17,6 +19,7 @@ export default function AgentCards({ tituloCard, subtituloCard, descripcion }: C
             <div className="agent-header">
                 <div className="agent-avatar">{iniciales}</div>
                 <div className="agent-info">
+                    <h1 className='agent-id'> {idAgente || '0'}  </h1>
                     <h1 className="agent-title">{tituloCard || 'Sin Nombre'}</h1>
                     <h2 className="agent-subtitle">{subtituloCard || 'Agente del Sistema'}</h2>
                 </div>

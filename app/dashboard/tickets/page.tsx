@@ -38,7 +38,8 @@ export default async function tickets(){
                 <Sidebar className="sidebar"/>
                  <main className="cards-grid">
                     {cardsData.map((card:any)=>
-                        <Card key={card.id_ticket} 
+                        <Card key={card.id_ticket}
+                              idTicket={card.id_ticket}
                             tituloCard={card.titulo}
                             subtituloCard={card.asunto}
                             fechaCard={card.fecha}
@@ -46,8 +47,10 @@ export default async function tickets(){
                             cardType={card.tipo}
                             cardStatus={card.estado}
                         />
+
                         
                     )}
+
                 </main>
             </div>
         </>

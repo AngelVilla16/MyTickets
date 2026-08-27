@@ -147,3 +147,15 @@
 .option:hover{
     cursor:pointer;
 }
+.btnUpdate{
+    color:white;
+    background-color: #D29922FF;
+    font-size: 0.85rem;
+    width: 55%;
+    padding: 5px;
+    border-radius: 10px;
+
+}
+.btnUpdate:hover{
+    cursor:pointer;
+}
