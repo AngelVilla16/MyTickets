@@ -43,7 +43,14 @@
     font-size: 0.95rem;
     letter-spacing: 0.5px;
 }
-
+.agent-id{
+    color: #8b949e;
+    border:1px solid #3fb950;
+    border-radius: 100%;
+    width: 28px;
+    padding:0px;
+    text-align: center;
+}
 .agent-info {
     display: flex;
     flex-direction: column;

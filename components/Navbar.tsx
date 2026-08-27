@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Button from '@/components/ui/Button';
+import AsignarBtn from '@/components/AsignarBtn';
 import '@/styles/navbar.css';
 
 interface NavbarProps {
@@ -35,9 +36,11 @@ export default function Navbar({ page }: NavbarProps) {
                         <h3 className="page-title">{page}</h3>
                         {fechaStr && <span className='date'>{fechaStr}</span>}
                     </div>
-                    <div className="action">
-                        <Button className='navBtn' textBtn='+ Asignar ticket' />
-                    </div>
+                    {page === "Dashboard de Soporte" && (
+                        <div className="action">
+                            <AsignarBtn />
+                        </div>
+                    )}
                 </div>
             </nav>
         </header>

@@ -1,5 +1,5 @@
-import Button from '@/components/ui/Button';
-import Selector from '@/components/ui/Selector';
+import DeleteButton from '@/components/ui/DeleteBtn';
+import TicketStatusUpdater from "@/components/ui/TicketStatusUpdater";
 import '@/styles/card.css';
 
 interface CardProps {
@@ -9,6 +9,8 @@ interface CardProps {
     descripcion?: string;
     cardType?: string;
     cardStatus?: string;
+    idTicket: number;
+
 }
 
 export default function Card({ 
@@ -17,13 +19,11 @@ export default function Card({
     subtituloCard, 
     descripcion, 
     cardType, 
-    cardStatus 
+    cardStatus,
+    idTicket,
+
 }: CardProps) {
-    const optionCards = [
-        { value: 'Activo', label: 'Activo' },
-        { value: 'Pendiente', label: 'Pendiente' },
-        { value: 'Cerrado', label: 'Cerrado' }
-    ];
+
 
 
     const tipoClass = cardType ? cardType.toLowerCase().trim() : '';
@@ -72,12 +72,11 @@ export default function Card({
             <div className="card-options">
                 <div className="action-group">
                     <img src="/assets/delete.svg" alt="Eliminar ticket" className="icon-card" />
-                    <Button textBtn="Eliminar Ticket" className='option' />
+                    <DeleteButton idTicket={idTicket}/>
                 </div>
 
                 <div className="action-group">
-                    <Selector options={optionCards} />
-                    <Button textBtn="Actualizar" className='option'/>
+                    <TicketStatusUpdater idTicket={idTicket} estadoInicial={cardStatus} />
                 </div>
             </div>
         </div>
