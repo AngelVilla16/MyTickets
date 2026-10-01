@@ -74,3 +74,38 @@
     color: black;
     font-size:0.85rem;
 }
+
+/* ==========================================
+   RESPONSIVE
+   ========================================== */
+@media (max-width: 768px) {
+    .navbar-container {
+        height: auto;
+        padding: 0.5rem 0;
+    }
+
+    .navbar {
+        flex-wrap: wrap;
+        gap: 10px;
+        padding: 0 1rem;
+    }
+
+    .right {
+        gap: 12px;
+    }
+
+    .page-info {
+        display: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .title {
+        font-size: 0.95rem;
+    }
+
+    .nav-icon {
+        width: 28px;
+        height: 28px;
+    }
+}

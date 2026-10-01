@@ -159,3 +159,33 @@
 .btnUpdate:hover{
     cursor:pointer;
 }
+
+/* ==========================================
+   RESPONSIVE
+   ========================================== */
+@media (max-width: 480px) {
+    .card {
+        padding: 14px;
+    }
+
+    .card-title {
+        font-size: 1.1rem;
+    }
+
+    .card-options {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .action-group {
+        flex-wrap: wrap;
+    }
+
+    .option {
+        width: 100%;
+    }
+
+    .btnUpdate {
+        width: 100%;
+    }
+}

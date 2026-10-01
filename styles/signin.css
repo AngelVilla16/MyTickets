@@ -34,3 +34,14 @@
     width: 320px; 
     max-width: 100%;
 }
+
+@media (max-width: 480px) {
+    .signin-container {
+        padding: 20px 16px;
+        margin: 0 12px;
+    }
+
+    .form {
+        width: 100%;
+    }
+}

@@ -106,3 +106,22 @@
         transform: translateY(0);
     }
 }
+
+/* ==========================================
+   RESPONSIVE
+   ========================================== */
+@media (max-width: 480px) {
+    .login-container {
+        padding: 24px 16px;
+        margin: 0 12px;
+    }
+
+    .form {
+        width: 100%;
+        max-width: 320px;
+    }
+
+    .container {
+        padding: 16px 0;
+    }
+}

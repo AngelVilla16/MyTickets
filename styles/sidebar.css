@@ -86,3 +86,30 @@
     opacity: 0.6;
     cursor: not-allowed;
 }
+
+/* ==========================================
+   RESPONSIVE
+   ========================================== */
+@media (max-width: 768px) {
+    .side-nav {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 8px;
+        height: auto;
+    }
+
+    .link-container {
+        margin-top: 0;
+        padding: 0.5rem 0.75rem;
+    }
+
+    .btn {
+        margin-top: 0;
+        margin-bottom: 0;
+        margin-left: auto;
+    }
+
+    .enlace {
+        margin: 0;
+    }
+}
