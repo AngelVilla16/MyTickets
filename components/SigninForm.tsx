@@ -28,7 +28,6 @@ export default function signinLogin({action, className}:formProps){
     const optionsRol = [
         { value: 'Frontend', label: 'Frontend' },
         { value: 'Backend', label: 'Backend' },
-        { value: 'DB Admin', label: 'DB Admin' },
         { value: 'QA', label: 'QA' },
         { value: 'FullStack', label: 'FullStack' }
     ];
