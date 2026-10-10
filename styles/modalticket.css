@@ -1,0 +1,74 @@
+/* ==========================================
+   MODAL CREAR TICKET
+   ========================================== */
+.modal-ticket {
+    width: 420px;
+    max-width: 90vw;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.modal-title {
+    color: #DCEAF7;
+    font-size: 1.25rem;
+    font-weight: 600;
+    text-align: center;
+    margin: 0 0 4px 0;
+}
+
+/* Los campos del formulario ocupan todo el ancho */
+.modal-ticket .modal-input {
+    width: 100%;
+    align-self: stretch;
+    padding: 8px 12px;
+}
+
+.modal-textarea {
+    width: 100%;
+    min-height: 70px;
+    resize: vertical;
+    background-color: #DCEAF7;
+    color: #081426;
+    border: 2px solid black;
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-family: inherit;
+    font-size: 0.9rem;
+    outline: none;
+}
+
+.modal-textarea:focus,
+.modal-ticket .modal-input:focus {
+    border-color: #6274e0;
+}
+
+/* Selector de tipo de ticket */
+.modal-select {
+    width: 100%;
+    background-color: #DCEAF7;
+    color: #081426;
+    border: 2px solid black;
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-family: inherit;
+    font-size: 0.9rem;
+    text-align: center;
+    outline: none;
+}
+
+.modal-select:focus {
+    border-color: #6274e0;
+}
+
+.modal-ticket .modal-options {
+    margin-top: 8px;
+    margin-left: 0;
+    justify-content: flex-end;
+}
+
+.modal-ticket .btnAsignar,
+.modal-ticket .btnCancel {
+    padding: 8px 18px;
+    font-size: 0.9rem;
+    cursor: pointer;
+}
