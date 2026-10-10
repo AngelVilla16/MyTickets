@@ -24,7 +24,7 @@ async function getSession() {
 export default async function tickets(){
     const user:any = await getSession();
     const idUser:any = user.id;
-
+    const rol:any = user.role;
     const sql = `SELECT id_ticket, titulo, asunto, descripcion, DATE_FORMAT(fecha, '%d/%m/%Y %H:%i') AS fecha, tipo, estado FROM tickets WHERE id_usuario = ?`;
 
     const cardsData:any = await query(sql,[idUser]);
@@ -32,7 +32,7 @@ export default async function tickets(){
     return(
         <>  
             <header>
-                <Navbar page='Mis Tickets'/>
+                <Navbar page='Mis Tickets' rol={rol}/>
             </header>
             <div className="ticketslayour">
                 <Sidebar className="sidebar"/>

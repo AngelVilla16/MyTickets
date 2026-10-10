@@ -29,6 +29,7 @@ async function getSession() {
 
 export default async function Dashboard({ searchParams }: DashProps) {
     const user: any = await getSession();
+    const rol: any = user?.role;
 
     // Lectura segura de searchParams
     const resolvedParams = searchParams ? await searchParams : {};
@@ -37,7 +38,7 @@ export default async function Dashboard({ searchParams }: DashProps) {
     return (
         <div className="dashboard-container">
             <header className="header-wrapper">
-                <Navbar page="Dashboard de Soporte" />
+                <Navbar page="Dashboard de Soporte" rol={rol} />
             </header>
 
             <div className="dashboard-layout">
