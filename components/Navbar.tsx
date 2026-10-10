@@ -7,10 +7,9 @@ import '@/styles/navbar.css';
 
 interface NavbarProps {
     page?: string;
-    puedeAsignar?: boolean;
 }
 
-export default function Navbar({ page, puedeAsignar = false }: NavbarProps) {
+export default function Navbar({ page }: NavbarProps) {
     const [fechaStr, setFechaStr] = useState<string>('');
 
     useEffect(() => {
@@ -37,7 +36,7 @@ export default function Navbar({ page, puedeAsignar = false }: NavbarProps) {
                         <h3 className="page-title">{page}</h3>
                         {fechaStr && <span className='date'>{fechaStr}</span>}
                     </div>
-                    {page === "Dashboard de Soporte" && puedeAsignar && (
+                    {page === "Dashboard de Soporte" && (
                         <div className="action">
                             <AsignarBtn />
                         </div>
