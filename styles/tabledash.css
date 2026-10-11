@@ -85,6 +85,22 @@
     background-color: rgba(74, 222, 128, 0.12);
 }
 
+/* Nuevas categorías */
+.type-badge.Maquetado {
+    color: #39c5cf; /* Cian */
+    background-color: rgba(57, 197, 207, 0.12);
+}
+
+.type-badge.DB {
+    color: #e3b341; /* Ámbar */
+    background-color: rgba(227, 179, 65, 0.12);
+}
+
+.type-badge.QA {
+    color: #f778ba; /* Rosa */
+    background-color: rgba(247, 120, 186, 0.12);
+}
+
 /* BADGES DE ESTADO (Abierto, En progreso, Resuelto) */
 .status-badge {
     font-size: 0.75rem;

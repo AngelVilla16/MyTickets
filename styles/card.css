@@ -127,6 +127,11 @@
 .type-badge.bug { background-color: rgba(248, 81, 73, 0.15); color: #ff7b72; }
 .type-badge.sugerencia { background-color: rgba(46, 160, 67, 0.15); color: #3fb950; }
 
+/* Nuevas categorías */
+.type-badge.maquetado { background-color: rgba(57, 197, 207, 0.15); color: #39c5cf; }
+.type-badge.db { background-color: rgba(227, 179, 65, 0.15); color: #e3b341; }
+.type-badge.qa { background-color: rgba(247, 120, 186, 0.15); color: #f778ba; }
+
 .status-badge {
     font-size: 0.75rem;
     padding: 3px 8px;
