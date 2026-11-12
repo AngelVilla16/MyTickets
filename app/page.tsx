@@ -2,6 +2,7 @@ import '@/styles/login.css';
 import Image from "next/image";
 import FormLogin from '@/components/FormLogin';
 
+export const dynamic = 'force-dynamic';
 
 export default function Index() {
   return (
@@ -9,7 +10,7 @@ export default function Index() {
     <div className="container">
       <div className="login-container">
         <FormLogin className='form'/>
-        
+
       </div>
     </div>
    </>

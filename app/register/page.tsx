@@ -2,6 +2,7 @@ import '@/styles/signin.css';
 import Image from "next/image";
 import SigninForm from '@/components/SigninForm';
 
+export const dynamic = 'force-dynamic';
 
 export default function Register() {
   return (
