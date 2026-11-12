@@ -2,8 +2,8 @@ import { query } from '@/lib/db';
 import Navbar from '@/components/Navbar';
 import Sidebar from '@/components/Sidebar';
 import AgentCards from '@/components/AgentCards';
-import '@/styles/agentes.css'; 
-
+import '@/styles/agentes.css';
+export const dynamic = 'force-dynamic';
 export default async function Agentes() {
     const sql = 'SELECT id_usuario, nombre, apellido, correo, rol FROM usuarios';
     const agentes: any = await query(sql);
@@ -22,7 +22,7 @@ export default async function Agentes() {
                         const nombreCompleto = `${agent.nombre} ${agent.apellido}`;
 
                         return (
-                            <AgentCards 
+                            <AgentCards
                                 key={agent.id_usuario}
                                 idAgente={agent.id_usuario}
                                 tituloCard={nombreCompleto}
