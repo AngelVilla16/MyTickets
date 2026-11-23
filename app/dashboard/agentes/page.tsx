@@ -1,12 +1,11 @@
-import { query } from '@/lib/db';
+import { query } from '@/lib/supabaseDb';
 import Navbar from '@/components/Navbar';
 import Sidebar from '@/components/Sidebar';
 import AgentCards from '@/components/AgentCards';
 import '@/styles/agentes.css';
 export const dynamic = 'force-dynamic';
 export default async function Agentes() {
-    const sql = 'SELECT id_usuario, nombre, apellido, correo, rol FROM usuarios';
-    const agentes: any = await query(sql);
+    const agentes: any = await query('SELECT id_usuario, nombre, apellido, correo, rol FROM usuarios');
 
     return (
         <>
@@ -18,9 +17,7 @@ export default async function Agentes() {
 
                 <main className="agentes-grid">
                     {agentes.map((agent: any) => {
-                        // Concatenación de nombre completo dentro del loop
                         const nombreCompleto = `${agent.nombre} ${agent.apellido}`;
-
                         return (
                             <AgentCards
                                 key={agent.id_usuario}
