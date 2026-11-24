@@ -44,7 +44,7 @@ export default async function TableDash({ filtro }: TableDashProps) {
         tickets = tickets
             .filter((t) => t.id_usuario != null)
             .map((t) => {
-                const u = userMap.get(t.id_usuario);
+                const u: any = userMap.get(t.id_usuario);
                 return { ...t, nombre: u?.nombre ?? 'Desconocido', apellido: u?.apellido ?? '' };
             });
     }
