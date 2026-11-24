@@ -4,7 +4,7 @@ import Button from '@/components/ui/Button';
 import {deleteTicket} from "@/app/actions/delete";
 
 interface DeleteButtonProps {
-    idTicket: number;
+    idTicket: string;
 }
 
 export default function DeleteButton({idTicket}: DeleteButtonProps) {

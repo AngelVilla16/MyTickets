@@ -13,13 +13,13 @@ interface ModalAsignarProps {
 
 export default function ModalAsignar({ onClose }: ModalAsignarProps){
     const [idUsuario, setIdUsuario] = useState<number>(0);
-    const [idTicket, setIdTicket] = useState<number>(0);
+    const [idTicket, setIdTicket] = useState<string>('');
     return(
         <div className="modal-container" onClick={onClose}>
             <div className="modal" onClick={(e) => e.stopPropagation()}>
                 <div className='modal-form'>
                     <Label className='modal-label' text='Ingrese el id de ticket a asignar: ' />
-                    <Input className='modal-input' type="number" onChange={(e)=>setIdTicket(Number(e.target.value))} />
+                    <Input className='modal-input' type="text" onChange={(e)=>setIdTicket(e.target.value)} />
                     <Label className='modal-label' text='Ingrese el id de usuario a asignar: '/>
                     <Input className='modal-input' type="number" onChange={(e)=>setIdUsuario(Number(e.target.value))}/>
                     <div className='modal-options'>

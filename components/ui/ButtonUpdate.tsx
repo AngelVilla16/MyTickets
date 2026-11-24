@@ -5,7 +5,7 @@ import "@/styles/card.css";
 import {updateTicket} from "@/app/actions/update";
 
 interface ButtonUpdateProps{
-    idTicket:number,
+    idTicket:string,
     estado:string,
 }
 
