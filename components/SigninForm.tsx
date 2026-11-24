@@ -49,6 +49,7 @@ export default function signinLogin({action, className}:formProps){
                     body: JSON.stringify({ nombre, apellido, correo, contrasena, vcontrasena, role })
                 });
                 const data = await res.json();
+                
                 if (!res.ok) {
                     setMensaje(data.mensaje);
                     return;

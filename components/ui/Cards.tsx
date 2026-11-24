@@ -9,7 +9,7 @@ interface CardProps {
     descripcion?: string;
     cardType?: string;
     cardStatus?: string;
-    idTicket: number;
+    idTicket: string;
 
 }
 

@@ -1,8 +1,11 @@
-import { query } from '@/lib/db';
+import { getDb } from '@/lib/mongo';
+import { query as pgQuery } from '@/lib/supabaseDb';
+import CopyButton from '@/components/ui/CopyButton';
 import '@/styles/tabledash.css';
+import { ObjectId } from 'mongodb';
 
 interface Ticket {
-    id_ticket: number;
+    id_ticket: string;
     fecha?: string;
     titulo?: string;
     asunto?: string;
@@ -15,24 +18,37 @@ interface TableDashProps {
 }
 
 export default async function TableDash({ filtro }: TableDashProps) {
-    // 1. Query base seleccionando 'asunto'
-    let sql = `SELECT id_ticket, DATE_FORMAT(fecha, '%d/%m/%Y %H:%i') AS fecha, titulo, asunto, tipo, estado FROM tickets`;
-    const values: string[] = [];
+    const db = await getDb();
+    const docs = await db.collection('tickets').find({}).sort({ _id: -1 }).toArray();
 
-    // 2. Filtro condicional por columna 'estado'
-    if (filtro && filtro !== 'Todos') {
-        sql += ` WHERE estado = ?`;
-        values.push(filtro);
+    let tickets: any[] = docs.map((d: any) => ({
+        id_ticket: d._id.toString(),
+        fecha: d.fecha ? new Date(d.fecha).toLocaleString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' }) : '',
+        titulo: d.titulo,
+        asunto: d.asunto,
+        descripcion: d.descripcion,
+        tipo: d.tipo,
+        estado: d.estado,
+        id_usuario: d.id_usuario,
+        nombre: '',
+        apellido: '',
+    }));
+
+    if (filtro && filtro !== 'Todos' && filtro !== 'Asignados') {
+        tickets = tickets.filter((t) => t.estado === filtro);
     }
-    if(filtro === 'Asignados'){
-        sql = `SELECT t.id_ticket,DATE_FORMAT(t.fecha, '%d/%m/%Y %H:%i') AS fecha , t.titulo, t.asunto, t.descripcion, t.tipo, t.estado, u.nombre, u.apellido FROM tickets t JOIN usuarios u ON t.id_usuario = u.id_usuario`;
+
+    if (filtro === 'Asignados') {
+        const usuarios: any = await pgQuery('SELECT id_usuario, nombre, apellido FROM usuarios');
+        const userMap = new Map(usuarios.map((u: any) => [u.id_usuario, u]));
+        tickets = tickets
+            .filter((t) => t.id_usuario != null)
+            .map((t) => {
+                const u = userMap.get(t.id_usuario);
+                return { ...t, nombre: u?.nombre ?? 'Desconocido', apellido: u?.apellido ?? '' };
+            });
     }
-    sql += ` ORDER BY id_ticket DESC`;
 
-    // 3. Ejecución limpia evitando duplicación de variables
-    const tickets: any = (await query(sql, values)) || [];
-
-    // Helper para clases CSS de estado
     const getEstadoClass = (estado: string) => {
         switch (estado?.trim()) {
             case 'Activo': return 'status-activo';
@@ -67,7 +83,7 @@ export default async function TableDash({ filtro }: TableDashProps) {
                 ) : (
                     tickets.map((ticket: any) => (
                         <tr key={ticket.id_ticket}>
-                            <td className="col-id">#{ticket.id_ticket}</td>
+                            <td className="col-id">#{ticket.id_ticket}<CopyButton text={ticket.id_ticket} /></td>
                             <td className="col-date">{ticket.fecha}</td>
                             <td className="col-title align-left">
                                 <div className="title-bold">{ticket.titulo}</div>
@@ -88,7 +104,7 @@ export default async function TableDash({ filtro }: TableDashProps) {
                             {filtro === 'Asignados' && (
                                 <td className='col-manage'>
                                     <div className='user-pill'>
-                                        <span className="user-avatar">{ticket.nombre.slice(0, 2).toUpperCase()}</span>
+                                        <span className="user-avatar">{ticket.nombre?.slice(0, 2).toUpperCase()}</span>
                                         <span>{ticket.nombre}</span>
                                     </div>
                                 </td>

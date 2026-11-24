@@ -3,7 +3,7 @@ import { jwtVerify } from 'jose';
 import Navbar from '@/components/Navbar';
 import Sidebar from '@/components/Sidebar';
 import Card from '@/components/ui/Cards';
-import {query} from '@/lib/db';
+import { getDb } from '@/lib/mongo';
 import '@/styles/ticketspage.css';
 
 async function getSession() {
@@ -21,25 +21,35 @@ async function getSession() {
     }
 }
 
-export default async function tickets(){
-    const user:any = await getSession();
-    const idUser:any = user.id;
-    const rol:any = user.role;
-    const sql = `SELECT id_ticket, titulo, asunto, descripcion, DATE_FORMAT(fecha, '%d/%m/%Y %H:%i') AS fecha, tipo, estado FROM tickets WHERE id_usuario = ?`;
+export default async function tickets() {
+    const user: any = await getSession();
+    const idUser: any = user.id;
+    const rol: any = user.role;
 
-    const cardsData:any = await query(sql,[idUser]);
+    const db = await getDb();
+    const docs = await db.collection('tickets').find({ id_usuario: idUser }).toArray();
 
-    return(
-        <>  
+    const cardsData = docs.map((d: any) => ({
+        id_ticket: d._id.toString(),
+        titulo: d.titulo,
+        asunto: d.asunto,
+        descripcion: d.descripcion,
+        fecha: d.fecha ? new Date(d.fecha).toLocaleString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit' }) : '',
+        tipo: d.tipo,
+        estado: d.estado,
+    }));
+
+    return (
+        <>
             <header>
-                <Navbar page='Mis Tickets' rol={rol}/>
+                <Navbar page='Mis Tickets' rol={rol} />
             </header>
             <div className="ticketslayour">
-                <Sidebar className="sidebar"/>
-                 <main className="cards-grid">
-                    {cardsData.map((card:any)=>
+                <Sidebar className="sidebar" />
+                <main className="cards-grid">
+                    {cardsData.map((card: any) =>
                         <Card key={card.id_ticket}
-                              idTicket={card.id_ticket}
+                            idTicket={card.id_ticket}
                             tituloCard={card.titulo}
                             subtituloCard={card.asunto}
                             fechaCard={card.fecha}
@@ -47,10 +57,7 @@ export default async function tickets(){
                             cardType={card.tipo}
                             cardStatus={card.estado}
                         />
-
-                        
                     )}
-
                 </main>
             </div>
         </>

@@ -27,7 +27,7 @@ Aplicación web full-stack para la gestión eficiente de tickets de trabajo, des
 | Framework | Next.js 15.3.1 (App Router, Turbopack) |
 | Runtime | React 19.2.8 |
 | Lenguaje | TypeScript 5 |
-| Base de datos | MySQL 8+ (driver `mysql2`) |
+| Base de datos | PostgreSQL (Supabase) para usuarios; MongoDB Atlas para tickets |
 | Autenticación | `jose` (JWT), `bcryptjs` |
 | Estilos | Tailwind CSS v4 (PostCSS) |
 | Linting | ESLint 9 + `eslint-config-next` |
@@ -95,7 +95,7 @@ MyTickets/
 
 - **Node.js** ≥ 20
 - **pnpm** ≥ 9 (recomendado) o npm/yarn
-- **MySQL** 8.0+ corriendo local o remoto
+- Cuenta en **Supabase** (PostgreSQL) y **MongoDB Atlas**
 
 ### 1. Clonar e instalar dependencias
 
@@ -110,15 +110,16 @@ pnpm install
 Crea un archivo `.env` en la raíz (basado en `.env.example` si existe):
 
 ```env
-# Base de datos MySQL
-DB_HOST=localhost
-DB_USER=root
-DB_PASSWORD=tu_password
-DB_NAME=mytickets_db
-DB_PORT=3306
-
-# JWT (usa una cadena larga y aleatoria en producción)
+# Postgres (Supabase) - usuarios
+DATABASE_URL=postgresql://postgres:<PASSWORD>@db.<ref>.supabase.co:5432/postgres
 JWT_SECRET=super_secreto_cambia_en_produccion
+
+# MongoDB Atlas - tickets
+MONGODB_URI=mongodb+srv://<user>:<password>@<cluster>.mongodb.net/mytickets?retryWrites=true&w=majority
+
+# Supabase (cliente)
+NEXT_PUBLIC_SUPABASE_URL=https://<ref>.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=<anon key>
 
 # Entorno
 NODE_ENV=development

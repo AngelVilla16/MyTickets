@@ -1,9 +1,14 @@
-"use server";
+'use server';
 
-import {query} from '@/lib/db';
-import {revalidatePath} from "next/cache";
+import { getDb } from '@/lib/mongo';
+import { revalidatePath } from 'next/cache';
+import { ObjectId } from 'mongodb';
 
-export async function deleteTicket(idTicket:number){
-    await query('DELETE FROM tickets WHERE id_ticket = ?', [idTicket]);
+export async function deleteTicket(idTicket: any) {
+    if (!ObjectId.isValid(idTicket)) {
+        throw new Error('ID de ticket inválido');
+    }
+    const db = await getDb();
+    await db.collection('tickets').deleteOne({ _id: new ObjectId(idTicket) });
     revalidatePath('/dashboard/tickets');
 }
