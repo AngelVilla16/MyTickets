@@ -3,6 +3,7 @@ import bcrypt from 'bcryptjs';
 import { cookies } from 'next/headers';
 import { SignJWT } from 'jose';
 import { query } from '@/lib/supabaseDb';
+import { syncUsuarios } from '@/lib/syncUsuarios';
 
 export async function POST(request: Request) {
     try {
@@ -24,6 +25,13 @@ export async function POST(request: Request) {
         const verifyContrasena = await bcrypt.compare(contrasena, usuario.contrasena);
         if (!verifyContrasena) {
             return NextResponse.json({ mensaje: "Correo o contraseña incorrectos." }, { status: 400 });
+        }
+
+        // Sincronizar usuarios de Postgres a Mongo al iniciar sesión
+        try {
+            await syncUsuarios();
+        } catch (e) {
+            console.error('Error sincronizando usuarios:', e);
         }
 
         const payload = {

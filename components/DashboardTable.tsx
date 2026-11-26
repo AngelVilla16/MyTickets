@@ -1,5 +1,4 @@
 import { getDb } from '@/lib/mongo';
-import { query as pgQuery } from '@/lib/supabaseDb';
 import CopyButton from '@/components/ui/CopyButton';
 import '@/styles/tabledash.css';
 import { ObjectId } from 'mongodb';
@@ -39,12 +38,13 @@ export default async function TableDash({ filtro }: TableDashProps) {
     }
 
     if (filtro === 'Asignados') {
-        const usuarios: any = await pgQuery('SELECT id_usuario, nombre, apellido FROM usuarios');
-        const userMap = new Map(usuarios.map((u: any) => [u.id_usuario, u]));
+        const db = await getDb();
+        const usuarios: any = await db.collection('usuarios').find({}).toArray();
+        const userMap = new Map(usuarios.map((u: any) => [Number(u.id_usuario), u]));
         tickets = tickets
             .filter((t) => t.id_usuario != null)
             .map((t) => {
-                const u: any = userMap.get(t.id_usuario);
+                const u: any = userMap.get(Number(t.id_usuario));
                 return { ...t, nombre: u?.nombre ?? 'Desconocido', apellido: u?.apellido ?? '' };
             });
     }

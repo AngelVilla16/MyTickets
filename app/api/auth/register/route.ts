@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import bcrypt from 'bcryptjs';
 import { query } from '@/lib/supabaseDb';
+import { getDb } from '@/lib/mongo';
 
 export async function POST(request: Request) {
     try {
@@ -29,8 +30,21 @@ export async function POST(request: Request) {
             "INSERT INTO usuarios(nombre, apellido, correo, contrasena, rol) VALUES($1,$2,$3,$4,$5) RETURNING id_usuario, nombre, apellido, correo, rol",
             [nombre, apellido, correo, hash, role]
         );
+        const nuevo = rows[0];
 
-        return NextResponse.json({ mensaje: "Usuario registrado con exito!", usuario: rows[0] }, { status: 201 });
+        // Replicar en MongoDB para joins locales
+        try {
+            const db = await getDb();
+            await db.collection('usuarios').updateOne(
+                { id_usuario: nuevo.id_usuario },
+                { $set: { id_usuario: nuevo.id_usuario, nombre: nuevo.nombre, apellido: nuevo.apellido, correo: nuevo.correo, rol: nuevo.rol, created_at: new Date() } },
+                { upsert: true }
+            );
+        } catch (e) {
+            console.error('Error replicando usuario en Mongo:', e);
+        }
+
+        return NextResponse.json({ mensaje: "Usuario registrado con exito!", usuario: nuevo }, { status: 201 });
     } catch (error: any) {
         console.error("Error al registrar ", error);
         if (error.code === '23505') {
